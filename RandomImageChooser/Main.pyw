@@ -1,7 +1,10 @@
 import tkinter as tk
 from PIL import Image, ImageTk
+import subprocess
 import random
 import os
+
+# New Image on button Press
 
 def choose_random_picture():
     picture_files = []
@@ -37,13 +40,31 @@ def choose_random_picture():
     else:
         label.config(text = "No Images found")
 
+# New Image on Space Pressed
 
 def call_choose_random_picture(event=None):
     choose_random_picture()
 
+# On P Open Path
+
+def open_picture_path(event=None):
+    path = path_var.get()
+    folder_path = os.path.dirname(path)
+    if os.name == 'nt':
+        subprocess.Popen(f'explorer.exe /select,"{path}"')
+    elif os.name == 'posix':
+        subprocess.call(["open", "-R", folder_path,path])
+
+
+
+
+
 # Create the GUI window
 root = tk.Tk()
-root.title("Time Machine (You can also press space to choose a new picture)")
+root.title("Time Machine (You can also press space to choose a new picture) (Press P to open the path of the image)")
+script_dir = os.path.dirname(os.path.abspath(__file__))
+icon_path = os.path.join(script_dir, "icon.ico")
+root.wm_iconbitmap(icon_path)
 
 # Create the label to display the picture
 label = tk.Label(root)
@@ -60,4 +81,5 @@ path_label.pack()
 
 # Run the GUI
 root.bind("<space>", call_choose_random_picture)
+root.bind("<p>", open_picture_path)
 root.mainloop()
