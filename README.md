@@ -5,6 +5,8 @@
 
 NOW MACOS COMPATIBLE
 
+Requires Python, PIL
+
 ~~Error when the image is bigger then your monitor screen you cant press the next button which you need to close and reopen.~~
 
 Light weight, Simple .py.
